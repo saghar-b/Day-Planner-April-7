@@ -11,7 +11,6 @@ let ThreePMtaskTime = document.querySelector("#threePmTask");
 let fourPMtaskTime = document.querySelector("#fourPmTask");
 let fivePMtaskTime = document.querySelector("#fivePmTask");
 let saveBtnEl = $(".saveBtn")
-// $("#time").text(currentTime);
 
 document.querySelector("#time").textContent = currentTime;
 setTheBackground(nineAMtaskTime, "AM");
@@ -23,13 +22,15 @@ setTheBackground(twoPMtaskTime, "PM");
 setTheBackground(ThreePMtaskTime, "PM");
 setTheBackground(fourPMtaskTime, "PM");
 setTheBackground(fivePMtaskTime, "PM");
+
 if (JSON.parse(localStorage.getItem("Work-Day-Scheduler")) === null) {
-    console.log(taskArray)
     localStorage.setItem("Work-Day-Scheduler", JSON.stringify(taskArray));
 }
-
+// get the informationfrom local array
 taskArray = JSON.parse(localStorage.getItem("Work-Day-Scheduler"))
 reloadTasks();
+
+// set the background color based on the time of the day
 function setTheBackground(tasktimeEl, AMPM) {
     let tTime = 0
     if (AMPM === "AM") {
@@ -43,12 +44,10 @@ function setTheBackground(tasktimeEl, AMPM) {
     //future
     if (tTime > currentHour) {
         tasktimeEl.classList.add("future")
-        console.log("bozorgrta");
     }
     // Present time
     else if (tTime === currentHour) {
         tasktimeEl.classList.add("present")
-        console.log("mosavi");
     }
     // Past time
     else {
@@ -56,18 +55,12 @@ function setTheBackground(tasktimeEl, AMPM) {
     }
 
 }
-
+// save button click
 saveBtnEl.on("click", function (event) {
     event.preventDefault();
 
     let descriptionEl = $(event.target).prev().val();
     let descriptionID = $(this).prev().attr("id")
-
-    console.log('event.target', event.target);
-    console.log('this', this);
-
-    console.log('descriptionEl', descriptionEl);
-    console.log('descriptionID', descriptionID);
 
     let task = {
         id: descriptionID,
@@ -78,6 +71,7 @@ saveBtnEl.on("click", function (event) {
 
 })
 
+// load thw information from local storage
 function reloadTasks() {
     for (let i = 0; i < taskArray.length; i++) {
         $("#" + taskArray[i].id).val(taskArray[i].discript)
