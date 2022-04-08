@@ -1,5 +1,5 @@
 # 05 Third-Party APIs: Work Day Scheduler
-
+## Saghar Behinaein
 ## Your Task
 
 Create a simple calendar application that allows a user to save events for each hour of the day by modifying starter code. This app will run in the browser and feature dynamically updated HTML and CSS powered by jQuery.
@@ -50,3 +50,8 @@ The following animation demonstrates the application functionality:
 
 
 ![The Password Generator application displays a red button to "Generate Password".](./Assets/full.png)
+
+
+*  GitHub repository name: Day-Planner-April-7
+*  The URL to the website is: https://saghar-b.github.io/Day-Planner-April-7/
+*  The URL of the GitHub repository : https://github.com/saghar-b/Day-Planner-April-7
