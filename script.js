@@ -1,6 +1,6 @@
 let currentTime=moment().format("dddd, MMM DD , YYYY - LT")
 let currentHour=moment().format("HH");
-// let currentHour=15;
+let taskArray=[];
 let nineAMtaskTime=document.querySelector("#nineAmTask");
 let tenAMtaskTime=document.querySelector("#tenAmTask");
 let elevenAMtaskTime=document.querySelector("#elevenAmTask");
@@ -10,7 +10,7 @@ let twoPMtaskTime=document.querySelector("#twoPmTask");
 let ThreePMtaskTime=document.querySelector("#threePmTask");
 let fourPMtaskTime=document.querySelector("#fourPmTask");
 let fivePMtaskTime=document.querySelector("#fivePmTask");
-let saveBtnEl=$(".tasks")
+let saveBtnEl=$(".saveBtn")
 // $("#time").text(currentTime);
 
 document.querySelector("#time").textContent=currentTime;
@@ -23,8 +23,12 @@ setTheBackground(twoPMtaskTime,"PM");
 setTheBackground(ThreePMtaskTime,"PM");
 setTheBackground(fourPMtaskTime,"PM");
 setTheBackground(fivePMtaskTime,"PM");
+if(JSON.parse(localStorage.getItem("Work-Day-Scheduler"))==null){
+    localStorage.setItem("Work-Day-Scheduler", JSON.stringify(taskArray));
+}
 
-
+taskArray=JSON.parse(localStorage.getItem("Work-Day-Scheduler"))
+reloadTasks();
 function setTheBackground(tasktimeEl,AMPM){
     let tTime=0
     if(AMPM==="AM"){
@@ -52,22 +56,23 @@ function setTheBackground(tasktimeEl,AMPM){
 
 }
 
-saveBtnEl.on("click",".saveBtn",function(event){
+saveBtnEl.on("click",function(event){
     event.preventDefault();
-    let element=event.target;
-//    let descriptionEl= element.querySelector(".description");
-   $('input[type="text"]').val()
-    // let descriptionEl= $(event.target).attr('data-letter');
-
-    console.log(event.target)
-    // console.log( $('textarea[type="text"]').val())
-    console.log( $('textarea[type="text"]').attr("name"))
     
-    let saghar =$(event.target).attr('data-textarea-id');
-    console.log(saghar );
-    let descrip=$("#"+saghar)
-    console.log("#"+saghar)
-    console.log($("#"+saghar).val())
+    let descriptionEl =$(event.target).prev().val();
+    let descriptionID=$(this).prev().attr("id")
+    let task={
+        id: descriptionID,
+        discript: descriptionEl.trim(),
+    }
+taskArray.push(task);
+localStorage.setItem("Work-Day-Scheduler",JSON.stringify(taskArray))
 
-    // $(event.target).attr('data-letter'));
 })
+
+function reloadTasks(){
+    for(let i=0;i<taskArray.length; i++){
+        // $("#fourPmTask").val("hiii")
+        $("#"+taskArray[i].id).val(taskArray[i].discript)
+    }
+}
