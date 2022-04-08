@@ -23,7 +23,8 @@ setTheBackground(twoPMtaskTime,"PM");
 setTheBackground(ThreePMtaskTime,"PM");
 setTheBackground(fourPMtaskTime,"PM");
 setTheBackground(fivePMtaskTime,"PM");
-if(JSON.parse(localStorage.getItem("Work-Day-Scheduler"))==null){
+if(JSON.parse(localStorage.getItem("Work-Day-Scheduler")) === null){
+    console.log(taskArray)
     localStorage.setItem("Work-Day-Scheduler", JSON.stringify(taskArray));
 }
 
